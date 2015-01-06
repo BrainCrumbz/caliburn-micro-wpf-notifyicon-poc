@@ -31,18 +31,33 @@ The system tray icon isn't bound to anything, so it can't perform any action at 
 
 [02-SysTrayOpenWindow][02-SysTrayOpenWindow] solution adds a ViewModel bound to NotifyIcon UI control. ViewModel is bound by means of the same XAML defining the icon resource, again without taking advantage of Caliburn.Micro way of coupling Views and ViewModels.
 
-System tray menu is now able to show/hide another window, but this happens without recurring to Caliburn.Micro usual navigation mechanism (e.g. WindowManager). Instead it works by means of classic WPF `Application.Current.MainWindow` property. And the second window is still a classic WPF Window with code-behind, not a View/ViewModel couple.
+System tray menu is now able to show/hide another window, but this happens without recurring to Caliburn.Micro navigation mechanism (e.g. `WindowManager`). Instead it works by means of classic WPF `Application.Current.MainWindow` property. And the second window is still a classic WPF Window with code-behind, not a View/ViewModel couple.
 
 For some reason, while system tray menu commands are successfully bound with Caliburn.Micro `Message.Attach`, binding on icon double-click event doesn't work, not even when following what's suggested [here][SO-doubleclick].
 
+NotifyIcon UI control is still instantiated by Bootstrapper.
+
 ###03-SysTrayOpenViewModel
 
-[03-SysTrayOpenViewModel][03-SysTrayOpenViewModel] solution 
+[03-SysTrayOpenViewModel][03-SysTrayOpenViewModel] solution starts to implement some of Caliburn.Micro specific rules and conventions.
+
+NotifyIcon UI control is still instantiated by Bootstrapper, but its ViewModel is not bound by XAML anymore, instead it's manually set by code in Bootstrapper. Not yet the Caliburn.Micro standard way, though.
+
+The other window is now actually a View/ViewModel couple, following Caliburn naming convention, and system tray menu is now showing/hiding it by means of Caliburn.Micro `WindowManager`. Double-click event, in order to work, still has to be bound to a WPF classic `ICommand` implementation.
+
+All dependencies are injected and registered with Autofac IoC container, completely integrated within Bootstrapper.
 
 ###04-SysTrayWithinWindow
 
-[04-SysTrayWithinWindow][04-SysTrayWithinWindow] solution 
+[04-SysTrayWithinWindow][04-SysTrayWithinWindow] solution fully integrates WPF NotifyIcon UI control with Caliburn.Micro way of building WPF applications.
 
+Notify UI control is not defined as an app-wide resource anymore, and is not instantiated by Bootstrapper anymore. It is now defined and instantiated in its own dedicated View as any other UI control. 
+
+The system tray View is also the application root View, and is set to always be completely invisible. It is bound to its ViewModel by naming convetion, and set as root within Bootstrapper following Caliburn.Micro standard.
+
+(Probably due to the regular binding in place between root View and ViewModel) Now double-click event on system tray icon can be bound through a Caliburn `Message.Attach` expression, so there are no more `ICommand` implementations in ViewModel.
+
+As a side note, system tray icon can be different than the task bar icon (when secondary View is visible).
 
 [Caliburn]: http://caliburnmicro.com/
 [NotifyIcon]: http://www.hardcodet.net/wpf-notifyicon
