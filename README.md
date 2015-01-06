@@ -19,5 +19,5 @@ Solution [04-SysTrayWithinWindow][SysTrayWithinWindow] is a working sample of a 
 
 [Caliburn]: http://caliburnmicro.com/
 [NotifyIcon]: http://www.hardcodet.net/wpf-notifyicon
-[SysTrayWithinWindow]: ./tree/master/04-SysTrayWithinWindow
+[SysTrayWithinWindow]: ./04-SysTrayWithinWindow
 [Autofac]: http://autofac.org/
