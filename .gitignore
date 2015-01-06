@@ -182,6 +182,10 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 
+# Backup copies
+*.bak
+*.orig
+
 # =========================
 # Operating System Files
 # =========================
