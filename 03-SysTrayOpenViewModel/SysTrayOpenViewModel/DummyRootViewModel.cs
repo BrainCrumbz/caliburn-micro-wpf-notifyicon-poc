@@ -5,9 +5,9 @@ using System.Text;
 
 namespace SysTrayOpenViewModel
 {
-    /* Il bootstrapper integrato con Autofac è un generic e richiede il tipo del view-model radice da mostrare.
-     * La app parte con la sola icona del system tray, quindi non c'è un view-model radice, quindi è stato creato
-     * un view-model dummy al solo scopo di passarlo al bootstrap.
+    /* Autofac-enabled bootstrapper is a generic and requires the type of root ViewModel to be shown.
+     * This application starts with system tray icon only, no visible window, so there's no real root ViewModel to show.
+     * Thus we created a dummy ViewModel for the sole purpose of serving that to bootstrapper.
      * */
     public class DummyRootViewModel
     {
