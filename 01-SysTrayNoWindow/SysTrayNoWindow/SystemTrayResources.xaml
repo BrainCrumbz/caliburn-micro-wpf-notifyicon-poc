@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                    xmlns:commented="Tag to add commenteds"
+                    xmlns:tb="http://www.hardcodet.net/taskbar"
+                    xmlns:local="clr-namespace:SysTrayNoWindow"
+                    mc:Ignorable="commented">
+
+    <!-- The taskbar context menu - the first row is a dummy to show off simple data binding -->
+    <!--
+        The "shared" directive is needed if we reopen the sample window a few times - WPF will otherwise
+        reuse the same context menu (which is a resource) again (which will have its DataContext set to the old TaskbarIcon)
+    -->
+    <ContextMenu x:Shared="false" x:Key="MainSysTrayMenu">
+        <MenuItem Header="Show Window" commented:Command="{Binding ShowWindowCommand}" />
+        <MenuItem Header="Hide Window" commented:Command="{Binding HideWindowCommand}" />
+        <Separator />
+        <MenuItem Header="Exit" commented:Command="{Binding ExitApplicationCommand}" />
+    </ContextMenu>
+
+    <!-- the application main system tray icon -->
+    <tb:TaskbarIcon x:Key="MainSystemTrayIcon"
+                    IconSource="Turquoise.ico"
+                    ToolTipText="Double-click for window, right-click for menu"
+                    DoubleClickCommand="{Binding ShowWindowCommand}"
+                    ContextMenu="{StaticResource MainSysTrayMenu}">
+
+        <!-- no data context (e.g. view-model) set for now -->
+        <!--
+        <tb:TaskbarIcon.DataContext>
+            <local:NotifyIconViewModel />
+        </tb:TaskbarIcon.DataContext>
+        -->
+    </tb:TaskbarIcon>
+
+</ResourceDictionary>
