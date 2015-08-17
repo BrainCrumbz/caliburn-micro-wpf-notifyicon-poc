@@ -2,7 +2,9 @@
 
 Proof of Concepts showing integration between [Caliburn.Micro][Caliburn] WPF MVVM framework and [WPF NotifyIcon][NotifyIcon] system tray UI control.
 
-##tl;dr
+##PoC 04 is the proposed final working solution!
+
+###tl;dr
 
 [04-SysTrayWithinWindow][04-SysTrayWithinWindow] Visual Studio solution is a working sample of a Windows WPF application showing the following:
 
